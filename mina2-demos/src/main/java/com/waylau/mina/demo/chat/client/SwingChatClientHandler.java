@@ -1,10 +1,11 @@
 package com.waylau.mina.demo.chat.client;
 
+import com.waylau.mina.demo.chat.ChatCommand;
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
-
-import com.waylau.mina.demo.chat.ChatCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * {@link IoHandler} implementation of the client side of the simple chat protocol.
@@ -13,6 +14,7 @@ import com.waylau.mina.demo.chat.ChatCommand;
  * @date 2015-4-6
  */
 public class SwingChatClientHandler extends IoHandlerAdapter {
+    private static final Logger LOGGER = LoggerFactory.getLogger("temp");
 
     public interface Callback {
         void connected();
@@ -52,18 +54,20 @@ public class SwingChatClientHandler extends IoHandlerAdapter {
 
             switch (command.toInt()) {
 
-            case ChatCommand.BROADCAST:
-                if (result.length == 3) {
-                    callback.messageReceived(result[2]);
-                }
-                break;
-            case ChatCommand.LOGIN:
-                callback.loggedIn();
-                break;
+                case ChatCommand.BROADCAST:
+                    if (result.length == 3) {
+//                    Logger.getLogger("temp").info("temp only==============");
+                        LOGGER.info("如果我只显示在temp就对了");
+                        callback.messageReceived(result[2]);
+                    }
+                    break;
+                case ChatCommand.LOGIN:
+                    callback.loggedIn();
+                    break;
 
-            case ChatCommand.QUIT:
-                callback.loggedOut();
-                break;
+                case ChatCommand.QUIT:
+                    callback.loggedOut();
+                    break;
             }
 
         } else {

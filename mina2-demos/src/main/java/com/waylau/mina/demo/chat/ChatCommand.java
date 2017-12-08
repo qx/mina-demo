@@ -25,6 +25,7 @@ public class ChatCommand {
     }
 
     public static ChatCommand valueOf(String s) {
+//        System.out.println(s+"-------");
         s = s.toUpperCase();
         if ("LOGIN".equals(s)) {
             return new ChatCommand(LOGIN);

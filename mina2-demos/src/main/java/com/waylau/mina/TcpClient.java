@@ -18,7 +18,7 @@ public class TcpClient {
 
 		try {
 
-			socket = new Socket("localhost", 1234);
+			socket = new Socket("localhost", 8080);
 			out = socket.getOutputStream();
 
 			// 请求服务器
